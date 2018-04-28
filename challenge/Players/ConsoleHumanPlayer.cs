@@ -5,24 +5,20 @@ namespace Challenge.Players
 {
     public class ConsoleHumanPlayer : Player
     {
-        public ConsoleHumanPlayer(ShapeFactory shapeFactory) : base(shapeFactory)
-        {
-        }
-
-        public override IShape GetShape()
+        public override IShape GetShape(ShapeFactory shapeFactory)
         {
             Console.Write($"{Name}'s turn: Choose [R]ock [S]pock [P]aper [L]izard s[C]issors: ");
             var input = Console.ReadLine();
             switch (input.ToUpper())
             {
-                case "R": return ShapeFactory.GetShape(Shape.Rock);
-                case "S": return ShapeFactory.GetShape(Shape.Spock);
-                case "P": return ShapeFactory.GetShape(Shape.Paper);
-                case "L": return ShapeFactory.GetShape(Shape.Lizard);
-                case "C": return ShapeFactory.GetShape(Shape.Scissors);
+                case "R": return shapeFactory.GetShape(Shape.Rock);
+                case "S": return shapeFactory.GetShape(Shape.Spock);
+                case "P": return shapeFactory.GetShape(Shape.Paper);
+                case "L": return shapeFactory.GetShape(Shape.Lizard);
+                case "C": return shapeFactory.GetShape(Shape.Scissors);
                 default:
                     Console.WriteLine("Not valid selection!");
-                    return GetShape();
+                    return GetShape(shapeFactory);
             }
         }
     }

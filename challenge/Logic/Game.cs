@@ -11,33 +11,36 @@ namespace Challenge.Logic
         public Player Player1 { get; }
         public Player Player2 { get; }
 
-        private DecisionMachine decisionMachine;
+        private readonly DecisionMachine _decisionMachine;
+        private readonly bool _useDecisionMachine;
 
-        private bool _useDecisionMachine;
+        private readonly ShapeFactory _shapeFactory;
         public Game(Player player1, Player player2, bool useDecisionMachine)
         {
             Player1 = player1;
             Player2 = player2;
 
+            _shapeFactory = new ShapeFactory();
+
             _useDecisionMachine = useDecisionMachine;
 
             if (useDecisionMachine)
-                decisionMachine = new DecisionMachine();
+                _decisionMachine = new DecisionMachine();
         }
 
         public DecisionResult PlayNewRound()
         {
-            var shape1 = Player1.GetShape();
+            var shape1 = Player1.GetShape(_shapeFactory);
             OnShapePlayed(Player1, shape1);
 
-            var shape2 = Player2.GetShape();
+            var shape2 = Player2.GetShape(_shapeFactory);
             OnShapePlayed(Player2, shape2);
 
             DecisionResult decisionResult;
 
             if (_useDecisionMachine)
             {
-                decisionResult = decisionMachine.GetResult(shape1, shape2);
+                decisionResult = _decisionMachine.GetResult(shape1, shape2);
             }
             else
             {

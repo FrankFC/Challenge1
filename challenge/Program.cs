@@ -10,8 +10,8 @@ namespace Challenge
         static void Main(string[] args)
         {
             var shapeFactory = new ShapeFactory();
-            var player1 = new ConsoleHumanPlayer(shapeFactory) { Name = "Frank" };
-            var player2 = new MachinePlayer(shapeFactory) { Name = "PC" };
+            var player1 = new ConsoleHumanPlayer() { Name = "Frank" };
+            var player2 = new MachinePlayer() { Name = "PC" };
 
             Console.Write("Use decision machine? (Y): ");
             var userReponse = Console.ReadLine();
